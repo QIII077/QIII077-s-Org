@@ -127,6 +127,7 @@ const RecordFood: React.FC<RecordFoodProps> = ({ onAddRecord, onClose }) => {
         <input 
           type="file" 
           accept="image/*" 
+          capture="environment"
           ref={fileInputRef} 
           className="hidden" 
           onChange={handleFileUpload}
