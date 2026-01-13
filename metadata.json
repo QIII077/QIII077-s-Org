@@ -1,0 +1,7 @@
+{
+  "name": "轻享健康 (Light Health)",
+  "description": "智能热量管理平台，基于磨砂玻璃美学设计的轻量级健康管理工具，旨在消除饮食焦虑。",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
