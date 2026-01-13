@@ -1,10 +1,9 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import GlassCard from './GlassCard';
-import { getSmartAdvice } from '../services/gemini';
 import { UserProfile, FoodRecord } from '../types';
 import { calculateDailyGoal, calculateTDEE } from '../utils';
-import { Sparkles, History as HistoryIcon, ArrowUpRight } from 'lucide-react';
+import { History as HistoryIcon, ArrowUpRight } from 'lucide-react';
 
 interface DashboardProps {
   profile: UserProfile;
@@ -12,7 +11,6 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ profile, records }) => {
-  const [advice, setAdvice] = useState<string>('正在为您生成个性化建议...');
   const intakeToday = records.reduce((acc, r) => acc + r.calories, 0);
   const tdee = calculateTDEE(profile);
   const dailyGoal = calculateDailyGoal(profile);
@@ -24,14 +22,6 @@ const Dashboard: React.FC<DashboardProps> = ({ profile, records }) => {
   const monthStr = today.toLocaleDateString('zh-CN', { month: 'long' });
   const dayStr = today.getDate();
   const weekdayStr = today.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
-
-  useEffect(() => {
-    const fetchAdvice = async () => {
-      const msg = await getSmartAdvice(profile, intakeToday, dailyGoal);
-      setAdvice(msg);
-    };
-    fetchAdvice();
-  }, [profile, intakeToday, dailyGoal]);
 
   return (
     <div className="space-y-8 pb-40 px-6 pt-10 animate-fade-in w-full">
@@ -101,19 +91,11 @@ const Dashboard: React.FC<DashboardProps> = ({ profile, records }) => {
             </div>
           </GlassCard>
 
-          {/* AI Insight Card */}
-          <GlassCard className="bg-white/40 border-white/60 shadow-sm py-8 px-7 rounded-[2.5rem]">
-            <div className="flex gap-6 items-start">
-              <div className="bg-gradient-to-br from-[#BC8A5F] to-[#D4A373] p-5 rounded-2xl shadow-xl shadow-[#BC8A5F]/15 flex-shrink-0">
-                <Sparkles className="text-white" size={26} />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xs font-black text-[#4A3E31]/40 mb-2 uppercase tracking-widest">AI 健康洞察</h3>
-                <p className="text-base md:text-lg text-[#4A3E31] font-bold leading-relaxed italic">
-                  "{advice}"
-                </p>
-              </div>
-            </div>
+          {/* Simple Motivational Card */}
+          <GlassCard className="bg-[#BC8A5F]/5 border-[#BC8A5F]/10 py-8 px-7 rounded-[2.5rem] flex items-center justify-center text-center">
+            <p className="text-[#4A3E31]/50 font-black italic text-sm tracking-wide">
+              "每一口健康的抉择，都是对未来的馈赠。✨"
+            </p>
           </GlassCard>
         </div>
 

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import GlassCard from './GlassCard';
-import { LogIn, UserPlus, ArrowRight, Loader2 } from 'lucide-react';
+import { ArrowRight, Loader2 } from 'lucide-react';
 
 interface LoginProps {
   onLogin: (username: string) => void;
@@ -33,50 +33,17 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
       <div className="w-full max-w-md animate-fade-in relative z-10">
         <div className="text-center mb-10">
-          {/* Minimalist Hand-drawn Salad Logo */}
           <div className="w-24 h-24 bg-gradient-to-br from-[#BC8A5F] to-[#D4A373] rounded-[2.5rem] mx-auto flex items-center justify-center shadow-2xl shadow-[#BC8A5F]/30 mb-6 rotate-3">
             <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-14 h-14 text-white opacity-95">
-              {/* Bowl - Hand-drawn style with slight asymmetry */}
-              <path 
-                d="M18,52 C18,82 82,82 82,52" 
-                stroke="currentColor" 
-                strokeWidth="5" 
-                fill="none" 
-                strokeLinecap="round" 
-              />
-              <path 
-                d="M15,52 L85,52" 
-                stroke="currentColor" 
-                strokeWidth="4" 
-                strokeLinecap="round" 
-                className="opacity-40" 
-              />
-              
-              {/* Salad Leaves - Organic wavy lines */}
-              <path 
-                d="M28,52 Q32,22 45,45 Q55,15 65,45 Q75,20 78,52" 
-                stroke="currentColor" 
-                strokeWidth="5" 
-                fill="none" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-              />
-              <path 
-                d="M38,38 Q45,12 55,30" 
-                stroke="currentColor" 
-                strokeWidth="3" 
-                fill="none" 
-                strokeLinecap="round" 
-                className="opacity-60"
-              />
-              
-              {/* Garnishes/Dots */}
+              <path d="M18,52 C18,82 82,82 82,52" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" />
+              <path d="M15,52 L85,52" stroke="currentColor" strokeWidth="4" strokeLinecap="round" className="opacity-40" />
+              <path d="M28,52 Q32,22 45,45 Q55,15 65,45 Q75,20 78,52" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M38,38 Q45,12 55,30" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" className="opacity-60" />
               <circle cx="48" cy="42" r="3.5" fill="currentColor" />
               <circle cx="62" cy="34" r="2.5" fill="currentColor" className="opacity-80" />
               <circle cx="35" cy="45" r="2" fill="currentColor" className="opacity-70" />
             </svg>
           </div>
-          
           <h1 className="text-3xl font-black text-[#4A3E31] tracking-tight">欢迎来到轻享健康</h1>
           <p className="text-[#4A3E31]/40 text-sm font-bold mt-2 uppercase tracking-widest">开启你的智能营养之旅</p>
         </div>

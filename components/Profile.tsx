@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
-import { UserProfile, ActivityLevel, GoalType } from '../types';
+import { UserProfile, GoalType } from '../types';
 import GlassCard from './GlassCard';
-import { Settings, Shield, Bell, HelpCircle, ChevronRight, Target, Edit3, ArrowLeft, Save, CheckCircle, Info, LogOut, X } from 'lucide-react';
+import { Settings, Shield, Bell, HelpCircle, ChevronRight, Target, Edit3, ArrowLeft, CheckCircle, Info, LogOut, X } from 'lucide-react';
 
 interface ProfileProps { 
   profile: UserProfile; 
@@ -15,7 +15,7 @@ const Profile: React.FC<ProfileProps> = ({ profile, setProfile, username, onLogo
   const [isEditingGoal, setIsEditingGoal] = useState(false);
   const [activeSubView, setActiveSubView] = useState<string | null>(null);
   const [isEditingBasic, setIsEditingBasic] = useState(false);
-  const [tempProfile, setTempProfile] = useState(profile);
+  const [tempProfile, setTempProfile] = useState<UserProfile>(profile);
 
   const updateGoal = (goal: GoalType) => { 
     setProfile({ ...profile, goal }); 
@@ -108,6 +108,19 @@ const Profile: React.FC<ProfileProps> = ({ profile, setProfile, username, onLogo
     );
   }
 
+  // 基础资料配置项，增加类型安全的 key 处理
+  const basicStats: { label: string; key: keyof UserProfile; isStatus?: boolean; value?: string }[] = [
+    { label: '身高 (cm)', key: 'height' },
+    { label: '体重 (kg)', key: 'weight' },
+    { label: '年龄', key: 'age' },
+    { 
+      label: '状态', 
+      key: 'goal',
+      value: profile.goal === GoalType.MAINTAIN ? '维持' : profile.goal === GoalType.LOSE ? '减脂' : '增重', 
+      isStatus: true 
+    }
+  ];
+
   return (
     <div className="p-8 pb-40 space-y-10 pt-12 animate-fade-in max-w-screen-xl mx-auto w-full">
       <div className="flex flex-col md:flex-row md:items-center gap-8 justify-between">
@@ -159,23 +172,18 @@ const Profile: React.FC<ProfileProps> = ({ profile, setProfile, username, onLogo
         <div className="space-y-6">
           <h3 className="font-black text-xl text-[#4A3E31] px-1 tracking-tight">基础资料</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-4">
-            {[
-              { label: '身高 (cm)', key: 'height' },
-              { label: '体重 (kg)', key: 'weight' },
-              { label: '年龄', key: 'age' },
-              { label: '状态', value: profile.goal === GoalType.MAINTAIN ? '维持' : profile.goal === GoalType.LOSE ? '减脂' : '增重', isStatus: true }
-            ].map((stat, i) => (
+            {basicStats.map((stat, i) => (
               <div key={i} className={`glass p-5 rounded-[2rem] text-center border-white/60 shadow-sm transition-all ${isEditingBasic ? 'bg-white/80 scale-105' : 'bg-white/40'}`}>
                 <p className="text-[10px] text-[#4A3E31]/40 uppercase font-black tracking-tighter">{stat.label}</p>
                 {isEditingBasic && !stat.isStatus ? (
                   <input 
                     type="number"
-                    value={(tempProfile as any)[stat.key]}
+                    value={tempProfile[stat.key] as number}
                     onChange={(e) => setTempProfile({...tempProfile, [stat.key]: parseFloat(e.target.value)})}
                     className="w-full bg-transparent text-center font-black text-[#BC8A5F] focus:outline-none text-base mt-1.5 border-b border-[#BC8A5F]/20"
                   />
                 ) : (
-                  <p className="text-base font-black text-[#4A3E31] mt-1.5">{stat.isStatus ? stat.value : (profile as any)[stat.key]}</p>
+                  <p className="text-base font-black text-[#4A3E31] mt-1.5">{stat.isStatus ? stat.value : profile[stat.key] as number}</p>
                 )}
               </div>
             ))}

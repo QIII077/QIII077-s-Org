@@ -1,7 +1,7 @@
 
 import React from 'react';
 import GlassCard from './GlassCard';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const mockTrendData = [
   { day: 'Mon', kcal: 1850 },

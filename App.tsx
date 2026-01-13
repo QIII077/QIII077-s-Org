@@ -1,13 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import { UserProfile, FoodRecord, MealType } from './types';
+import { UserProfile, FoodRecord } from './types';
 import { DEFAULT_PROFILE } from './constants';
 import Dashboard from './components/Dashboard';
 import BottomNav from './components/BottomNav';
 import RecordFood from './components/RecordFood';
 import History from './components/History';
 import Profile from './components/Profile';
-import AIAssistant from './components/AIAssistant';
 import Login from './components/Login';
 
 const App: React.FC = () => {
@@ -67,8 +66,6 @@ const App: React.FC = () => {
     switch (activeTab) {
       case 'home':
         return <Dashboard profile={profile} records={records} />;
-      case 'assistant':
-        return <AIAssistant />;
       case 'history':
         return <History />;
       case 'profile':

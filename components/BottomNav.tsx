@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Home, Sparkles, PlusCircle, TrendingUp, User } from 'lucide-react';
+import { Home, PlusCircle, TrendingUp, User } from 'lucide-react';
 
 interface BottomNavProps {
   activeTab: string;
@@ -10,7 +10,6 @@ interface BottomNavProps {
 const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab }) => {
   const tabs = [
     { id: 'home', icon: Home, label: '首页' },
-    { id: 'assistant', icon: Sparkles, label: '小助' },
     { id: 'record', icon: PlusCircle, label: '记录', special: true },
     { id: 'history', icon: TrendingUp, label: '历史' },
     { id: 'profile', icon: User, label: '我的' },
@@ -18,7 +17,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, setActiveTab }) => {
 
   return (
     <div className="fixed bottom-0 left-0 w-full px-6 pb-10 pointer-events-none z-50 flex justify-center">
-      <nav className="w-full max-w-md md:max-w-lg glass rounded-[2.5rem] px-5 py-4 flex justify-between items-center shadow-[0_20px_50px_rgba(74,62,49,0.1)] border-white/80 pointer-events-auto transition-all duration-500 hover:shadow-[0_25px_60px_rgba(188,138,95,0.2)]">
+      <nav className="w-full max-w-md glass rounded-[2.5rem] px-5 py-4 flex justify-between items-center shadow-[0_20px_50px_rgba(74,62,49,0.1)] border-white/80 pointer-events-auto transition-all duration-500 hover:shadow-[0_25px_60px_rgba(188,138,95,0.2)]">
         {tabs.map((tab) => (
           <button
             key={tab.id}
